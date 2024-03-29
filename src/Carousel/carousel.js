@@ -39,7 +39,9 @@ function CarouselSlide() {
   return (
     <div className="carousel-container">
       {loading ? ( // Render loading state if loading is true
-        <p>Loading...</p>
+        <div className="loading-overlay">
+          <p className="loading-message">Loading...</p>
+        </div>
       ) : (
         <Carousel
           showThumbs={false}
