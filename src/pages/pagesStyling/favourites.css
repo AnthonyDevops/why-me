@@ -1,0 +1,222 @@
+/* Favorites Page CSS */
+.podcast-container {
+    max-width: auto;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #121212dc;
+}
+
+.back-link {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    width: 45px;
+    margin-top: 50px;
+    /* Adjust this value to move the button down */
+}
+.back-link:hover {
+    background-color: #a37272;
+}
+
+.showimage {
+    width: 500px;
+    max-height: 500px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: 0 auto;
+}
+
+.showdetails {
+    margin-top: 20px;
+}
+
+.showtitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+}
+
+.showdescription {
+    margin: 10px 0;
+    color: #ffffff;
+    text-align: center;
+}
+
+.description {
+    font-weight: bold;
+    color: #ffffff;
+    display: block;
+}
+
+.showseason {
+    text-align: center;
+}
+
+.showseason label {
+    font-weight: bold;
+    color: #ffffff;
+    display: block;
+}
+
+.showseason select {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.season-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.episode-title {
+    margin: 10px 0;
+    color: #ffffff;
+    text-align: center;
+}
+
+.episode-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.episode-card {
+    border: 5px solid #ccc;
+    border-radius: 15px;
+    padding: 3px;
+    margin-top: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 80%;
+    height: auto;
+    margin: 3 auto;
+    transition: transform .2s;
+    font-family: 'Space Mono', monospace;
+    color: rgb(0, 0, 0);
+}
+
+.episode-card:hover {
+    transform: scale(1.02);
+}
+
+.audio-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+audio {
+    width: 100%;
+}
+
+p.error {
+    color: red;
+    font-weight: bold;
+}
+
+select#seasons {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Space Mono', monospace;
+    color: #ffffff;
+    width: 200px;
+}
+
+select#seasons:focus {
+    outline: none;
+    border-color: #5A7C66;
+}
+
+.loading-message {
+    text-align: center;
+    font-size: 50px;
+    color: #ffffff;
+}
+
+@media (max-width: 320px) {
+    .podcast-container {
+        max-width: 320px;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: #DECFC8;
+    }
+
+    .showimage {
+        width: 100%;
+        max-height: auto;
+    }
+
+    .showtitle {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .showdescription {
+        margin: 5px 0;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .showseason label {
+        font-size: 14px;
+    }
+
+    .showseason select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+    }
+
+    .season-title {
+        font-size: 18px;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .episode-title {
+        margin: 5px 0;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .episode-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .episode-card {
+        width: 100%;
+        margin: 0;
+        font-size: 14px;
+    }
+
+    audio {
+        width: 100%;
+    }
+
+    select#seasons {
+        width: 100%;
+        padding: 8px;
+    }
+
+    .loading-message {
+        font-size: 30px;
+        color: #ffffff;
+    }
+}

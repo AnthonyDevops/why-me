@@ -1,0 +1,44 @@
+.div {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: black;
+    /* Set navbar background color to black */
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    /* Add padding */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add shadow for depth */
+}
+
+.div-2 {
+    font-size: 24px;
+    color: white;
+    /* Set color of "The NightOwl" text to white */
+    text-shadow: 0 0 10px orange;
+    /* Add pulsing orange shadow effect */
+    animation: pulse 1.5s infinite alternate;
+    /* Add pulsing animation */
+}
+
+.div-3 {
+    display: flex;
+    margin-left: -70px;
+    /* Adjust margin to move links closer to "The NightOwl" */
+}
+
+.nav-link {
+    margin-right: 260px;
+    color: white;
+    /* Set color of navbar links to white */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-link:hover {
+    color: #ccc;
+    /* Change color on hover */
+}
