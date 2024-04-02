@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./pagesStyling/favourites.css";
+import "./pagesStyling/favourites.css"; // Import the CSS file
 
 const Favorites = () => {
   const [favorites, setFavorites] = useState([]);
@@ -54,9 +54,10 @@ const Favorites = () => {
 
   return (
     <div className="podcast-container">
+      {/* Apply podcast-container class */}
       <h2>Favorites</h2>
       <div className="sorting-options">
-        <label>Sort by: </label>
+        <label className="label">Sort by: </label>
         <select onChange={(e) => sortFavorites(e.target.value)}>
           <option value="">Select</option>
           <option value="A-Z">A-Z</option>
@@ -66,23 +67,30 @@ const Favorites = () => {
         </select>
       </div>
       <Link to="/" className="back-link">
+        {" "}
+        {/* Apply back-link class */}
         Back
       </Link>{" "}
       {/* Back button */}
       {favorites.map((favorite) => (
         <div key={favorite.id} className="favorite-item">
+          {/* Apply favorite-item class */}
           <img
             src={favorite.image}
             alt={favorite.title}
             className="showimage"
           />
           <div className="showdetails">
+            {/* Apply showdetails class */}
             <h3 className="showtitle">{favorite.title}</h3>
+            {/* Apply showtitle class */}
             <p className="showdescription">{favorite.description}</p>
+            {/* Apply showdescription class */}
             <p className="date-added">Added: {favorite.dateAdded}</p>{" "}
             {/* Display date added */}
             <div className="season-dropdown">
-              <label htmlFor={`season-select-${favorite.id}`}>
+              {/* Apply season-dropdown class */}
+              <label htmlFor={`season-select-${favorite.id}`} classname="season-label">
                 Select Season:
               </label>
               <select
@@ -90,25 +98,31 @@ const Favorites = () => {
                 onChange={(e) => handleSelectSeason(e, favorite.id)}
               >
                 <option value="">All Seasons</option>
-                {favorite.seasons.map((season) => (
-                  <option key={season.season} value={season.season}>
-                    Season {season.season}
-                  </option>
-                ))}
+                {favorite.seasons &&
+                  favorite.seasons.map((season) => (
+                    <option key={season.season} value={season.season}>
+                      Season {season.season}
+                    </option>
+                  ))}
               </select>
             </div>
             {selectedSeason &&
               selectedSeason.favoriteId === favorite.id &&
+              favorite.seasons &&
               favorite.seasons
                 .filter(
                   (season) => season.season === selectedSeason.seasonNumber
                 )
                 .map((season) => (
                   <div key={season.season} className="season">
+                    {/* Apply season class */}
                     <h4 className="season-title">Season {season.season}</h4>
+                    {/* Apply season-title class */}
                     {season.episodes.map((episode) => (
                       <div key={episode.episode} className="episode-card">
+                        {/* Apply episode-card class */}
                         <p className="episode-title">{episode.title}</p>
+                        {/* Apply episode-title class */}
                         <p>{episode.description}</p>
                         <audio controls src={episode.file}></audio>
                       </div>
@@ -119,12 +133,17 @@ const Favorites = () => {
               <div className="error">No season selected for this favorite.</div>
             )}
             {selectedSeason === null &&
+              favorite.seasons &&
               favorite.seasons.map((season) => (
                 <div key={season.season} className="season">
+                  {/* Apply season class */}
                   <h4 className="season-title">Season {season.season}</h4>
+                  {/* Apply season-title class */}
                   {season.episodes.map((episode) => (
                     <div key={episode.episode} className="episode-card">
+                      {/* Apply episode-card class */}
                       <p className="episode-title">{episode.title}</p>
+                      {/* Apply episode-title class */}
                       <p>{episode.description}</p>
                       <div className="audio-container">
                         <audio controls src={episode.file}></audio>

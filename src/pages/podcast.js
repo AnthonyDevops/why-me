@@ -1,15 +1,17 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./pagesStyling/podcast.css";
+import ReactAudioPlayer from "react-audio-player";
 
 const Podcast = () => {
   const { id } = useParams();
-  const goBack = useNavigate();
+  const navigate = useNavigate();
 
   const [podcast, setPodcast] = useState({});
   const [podcastSeason, setPodcastSeason] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentAudio, setCurrentAudio] = useState(null);
 
   useEffect(() => {
     const fetchPodcast = async () => {
@@ -28,6 +30,20 @@ const Podcast = () => {
 
     fetchPodcast();
   }, [id]);
+
+  useEffect(() => {
+    const handleWindowClose = (event) => {
+      if (currentAudio !== null) {
+        return "Audio is currently playing. Are you sure you want to leave?";
+      }
+    };
+
+    window.addEventListener("beforeunload", handleWindowClose);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleWindowClose);
+    };
+  }, [currentAudio]);
 
   const fetchPodcastData = async (id) => {
     try {
@@ -48,16 +64,38 @@ const Podcast = () => {
     setPodcastSeason(selectedSeason);
   };
 
-  const addToFavorites = () => {
-    // Get current favorites from local storage
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    // Check if the podcast is already in favorites
-    if (!favorites.some((fav) => fav.id === podcast.id)) {
-      // Add the current podcast to favorites
-      favorites.push(podcast);
-      // Update local storage
-      localStorage.setItem("favorites", JSON.stringify(favorites));
+  const handleAudioPlay = (index) => {
+    if (currentAudio !== null && currentAudio !== index) {
+      // If there is an audio playing, pause it
+      document.getElementById(`audio-${currentAudio}`).pause();
     }
+    setCurrentAudio(index);
+  };
+
+  const handleBackClick = () => {
+    if (currentAudio !== null) {
+      const confirmation = window.confirm(
+        "Audio is currently playing. Are you sure you want to leave?"
+      );
+      if (!confirmation) {
+        return; // Stay on the page
+      }
+    }
+    navigate(-1); // Navigate back
+  };
+
+  const handleAddToFavorites = () => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const newFavorite = {
+      id: podcast.id,
+      title: podcast.title,
+      description: podcast.description,
+      image: podcastSeason.image,
+      dateAdded: new Date().toISOString(),
+      seasons: podcast.seasons,
+    };
+    favorites.push(newFavorite);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
   };
 
   if (loading)
@@ -70,11 +108,14 @@ const Podcast = () => {
 
   return (
     <div className="podcast-container">
-      <p className="back-link" onClick={() => goBack("/")}>
+      <p className="back-link" onClick={handleBackClick}>
         Back
       </p>
-      <button onClick={addToFavorites}>Add to Favorites</button> {/* Button to add podcast to favorites */}
-      <img src={podcastSeason.image} alt={podcast.title} className="showimage" />
+      <img
+        src={podcastSeason.image}
+        alt={podcast.title}
+        className="showimage"
+      />
       <div className="showdetails">
         <h2 className="showtitle">{podcast.title}</h2>
         <p className="showdescription">
@@ -83,6 +124,7 @@ const Podcast = () => {
           {podcast.description}
         </p>
         <br />
+        <button onClick={handleAddToFavorites}>Add to Favorites</button>
         <div className="showseason">
           <label htmlFor="seasons" className="description">
             Seasons:
@@ -99,16 +141,24 @@ const Podcast = () => {
         </div>
         <div className="show-episode">
           <h2 className="season-title">Season: {podcastSeason.season}</h2>
-          <p className="episode-title">Episodes: {podcastSeason.episodes?.length || 0}</p>
+          <p className="episode-title">
+            Episodes: {podcastSeason.episodes?.length || 0}
+          </p>
           <br />
           <span className="episode-container">
             {podcastSeason.episodes &&
-              podcastSeason.episodes.map((episode) => (
+              podcastSeason.episodes.map((episode, index) => (
                 <div key={episode.episode} className="episode-card">
                   <h3>{episode.title}</h3>
                   <p>Episode {episode.episode}</p>
                   <p>{episode.description}</p>
-                  <audio controls src={episode.file}></audio>
+                  <ReactAudioPlayer
+                    src={episode.file}
+                    autoPlay={false}
+                    controls
+                    id={`audio-${index}`}
+                    onPlay={() => handleAudioPlay(index)}
+                  />
                 </div>
               ))}
           </span>

@@ -1,10 +1,13 @@
-/* Favorites Page CSS */
 .podcast-container {
     max-width: auto;
     margin: 0 auto;
     padding: 20px;
     background-color: #121212dc;
 }
+.season-label{
+    color:white;
+}
+
 
 .back-link {
     background-color: #ffffff;
@@ -16,11 +19,10 @@
     font-size: 16px;
     text-decoration: none;
     width: 45px;
-    margin-top: 50px;
-    /* Adjust this value to move the button down */
 }
+
 .back-link:hover {
-    background-color: #a37272;
+    background-color: #4C6E5A;
 }
 
 .showimage {
@@ -59,27 +61,17 @@
     text-align: center;
 }
 
-.showseason label {
-    font-weight: bold;
-    color: #ffffff;
-    display: block;
-}
+
 
 .showseason select {
     width: 300px;
     padding: 10px;
-    border: 1px solid #000000;
+    border: 1px solid #ffffff;
     border-radius: 5px;
     margin-top: 10px;
 }
 
-.season-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #ffffff;
-    margin-top: 20px;
-    text-align: center;
-}
+
 
 .episode-title {
     margin: 10px 0;
@@ -87,22 +79,18 @@
     text-align: center;
 }
 
-.episode-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-}
+
 
 .episode-card {
-    border: 5px solid #ccc;
-    border-radius: 15px;
-    padding: 3px;
-    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 15px;
     background-color: #ffffff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 80%;
+    width: 100%;
     height: auto;
-    margin: 3 auto;
+    margin: 0 auto;
     transition: transform .2s;
     font-family: 'Space Mono', monospace;
     color: rgb(0, 0, 0);
@@ -112,12 +100,6 @@
     transform: scale(1.02);
 }
 
-.audio-container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 5px;
-    margin-top: 20px;
-}
 
 audio {
     width: 100%;
@@ -219,4 +201,14 @@ select#seasons:focus {
         font-size: 30px;
         color: #ffffff;
     }
+}
+.sorting-options {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right:55px;
+}
+.label{
+    color:white;
+    margin-right:20px;
 }
